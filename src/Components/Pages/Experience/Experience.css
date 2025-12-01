@@ -1,0 +1,414 @@
+.experience-section {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 120px 0;
+  position: relative;
+}
+
+/* ==================== TITLE ==================== */
+.experience-title {
+  font-size: 56px;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.experience-title.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.title-text {
+  background: linear-gradient(135deg, var(--circle-pop), var(--circle-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+  position: relative;
+}
+
+.title-underline {
+  height: 4px;
+  width: 0;
+  background: linear-gradient(90deg, var(--circle-pop), var(--circle-accent));
+  margin: 20px auto 0;
+  border-radius: 10px;
+  transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+}
+
+.experience-title.show .title-underline {
+  width: 160px;
+}
+
+/* ==================== TIMELINE ==================== */
+.timeline {
+  position: relative;
+  padding-left: 20px;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(180deg, var(--circle-pop), var(--circle-accent));
+  opacity: 0.5;
+  border-radius: 10px;
+  transform: translateX(-50%);
+  transition: height 2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.timeline.show .timeline-line {
+  height: 100%;
+}
+
+/* Animated gradient flow */
+.timeline-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.4), transparent);
+  animation: flow-down 3s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes flow-down {
+  0% { top: 0%; opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ==================== CARD BASE ==================== */
+.exp-card {
+  width: 48%;
+  padding: 28px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  position: relative;
+  margin-bottom: 70px;
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.exp-card.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Alternating Sides */
+.exp-card.left {
+  margin-right: auto;
+}
+
+.exp-card.right {
+  margin-left: auto;
+}
+
+/* Hover effect */
+.exp-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 212, 255, 0.3);
+  border-color: var(--circle-pop);
+}
+
+/* Card glow background */
+.card-glow {
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--circle-pop), var(--circle-accent));
+  border-radius: 20px;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: blur(15px);
+}
+
+.exp-card:hover .card-glow {
+  opacity: 0.2;
+}
+
+/* ==================== CONNECTOR DOT ==================== */
+.exp-dot {
+  position: absolute;
+  top: 30px;
+  right: -20px;
+  width: 20px;
+  height: 20px;
+  background: var(--circle-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--circle-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.exp-card.show .exp-dot {
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: 0.3s;
+}
+
+.exp-card.right .exp-dot {
+  left: -20px;
+  right: auto;
+}
+
+/* Pulsing ring */
+.dot-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--circle-accent);
+  animation: pulse-ring 2.5s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* ==================== GRADIENT VARIANTS ==================== */
+.blue-cyan {
+  border-color: rgba(0, 180, 216, 0.3);
+}
+.blue-cyan:hover { border-color: #00b4d8; }
+.blue-cyan .exp-dot { 
+  background: #00b4d8; 
+  box-shadow: 0 0 20px #00b4d8;
+}
+.blue-cyan .dot-pulse { background: #00b4d8; }
+
+.emerald-teal {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+.emerald-teal:hover { border-color: #10b981; }
+.emerald-teal .exp-dot { 
+  background: #10b981; 
+  box-shadow: 0 0 20px #10b981;
+}
+.emerald-teal .dot-pulse { background: #10b981; }
+
+.amber-yellow {
+  border-color: rgba(251, 191, 36, 0.3);
+}
+.amber-yellow:hover { border-color: #fbbf24; }
+.amber-yellow .exp-dot { 
+  background: #fbbf24; 
+  box-shadow: 0 0 20px #fbbf24;
+}
+.amber-yellow .dot-pulse { background: #fbbf24; }
+
+.purple-pink {
+  border-color: rgba(217, 70, 239, 0.3);
+}
+.purple-pink:hover { border-color: #d946ef; }
+.purple-pink .exp-dot { 
+  background: #d946ef; 
+  box-shadow: 0 0 20px #d946ef;
+}
+.purple-pink .dot-pulse { background: #d946ef; }
+
+.orange-red {
+  border-color: rgba(251, 86, 7, 0.3);
+}
+.orange-red:hover { border-color: #fb5607; }
+.orange-red .exp-dot { 
+  background: #fb5607; 
+  box-shadow: 0 0 20px #fb5607;
+}
+.orange-red .dot-pulse { background: #fb5607; }
+
+.indigo-purple {
+  border-color: rgba(99, 102, 241, 0.3);
+}
+.indigo-purple:hover { border-color: #6366f1; }
+.indigo-purple .exp-dot { 
+  background: #6366f1; 
+  box-shadow: 0 0 20px #6366f1;
+}
+.indigo-purple .dot-pulse { background: #6366f1; }
+
+/* ==================== CONTENT ==================== */
+.exp-content {
+  position: relative;
+}
+
+.role-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.exp-content h3 {
+  color: var(--circle-pop);
+  font-size: 24px;
+  font-weight: 700;
+  transition: color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.exp-card:hover .exp-content h3 {
+  color: var(--circle-accent);
+}
+
+.role-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 212, 255, 0.1);
+  border-radius: 50%;
+  color: var(--circle-pop);
+  font-size: 16px;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.exp-card:hover .role-icon {
+  background: rgba(0, 212, 255, 0.2);
+  transform: rotate(360deg);
+}
+
+.company,
+.date {
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  transition: color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.company {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.date {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.company i,
+.date i {
+  color: var(--circle-pop);
+  font-size: 14px;
+}
+
+/* ==================== BULLET LIST ==================== */
+.exp-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.exp-content li {
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 28px;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.exp-card.show li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.bullet-icon {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 212, 255, 0.1);
+  border-radius: 4px;
+  color: var(--circle-pop);
+  font-size: 10px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.exp-content li:hover .bullet-icon {
+  background: var(--circle-pop);
+  color: var(--bg-primary);
+  transform: translateX(3px);
+}
+
+.exp-content li:hover {
+  color: rgba(255, 255, 255, 0.9);
+  transform: translateX(5px);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 900px) {
+  .experience-section {
+    padding: 80px 0;
+  }
+
+  .experience-title {
+    font-size: 42px;
+    margin-bottom: 60px;
+  }
+
+  .exp-card,
+  .exp-card.left,
+  .exp-card.right {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .timeline-line {
+    left: 12px;
+  }
+
+  .exp-dot,
+  .exp-card.right .exp-dot {
+    left: -8px;
+    right: auto;
+  }
+
+  .exp-content {
+    padding-left: 10px;
+  }
+
+  .title-underline {
+    width: 120px !important;
+  }
+
+  .role-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}

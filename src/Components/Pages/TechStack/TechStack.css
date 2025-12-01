@@ -1,0 +1,131 @@
+/* Section base */
+.tech-section {
+ width: 90%;
+  max-width: 1400px;
+  margin: auto;
+  padding: 100px 0;
+}
+
+.tech-title {
+  text-align: center;
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--circle-pop), var(--circle-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 40px;
+}
+
+/* Grid layout */
+.tech-container {
+  display: grid;
+  gap: 35px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* Card */
+.tech-box {
+  padding: 25px;
+  border-radius: 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--circle-pop);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px var(--shadow);
+  transition: 0.3s ease;
+  animation: float-card 6s ease-in-out infinite;
+}
+
+@keyframes float-card {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.tech-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px var(--glow);
+}
+
+/* Category title */
+.tech-box h3 {
+  color: var(--circle-pop);
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Items grid */
+.tech-items {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* Icon + label */
+.tech-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tech-icon {
+  font-size: 30px;
+  color: var(--circle-pop);
+  transition: 0.3s;
+}
+
+.tech-item:hover .tech-icon {
+  transform: scale(1.25);
+  color: var(--circle-accent);
+}
+
+.tech-item p {
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Smooth reveal */
+.reveal,
+.reveal-item {
+  opacity: 0;
+  transform: translateY(40px) scale(0.96);
+  filter: blur(6px);
+  transition: 
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out,
+    filter 0.8s ease-out;
+}
+
+.reveal.active,
+.reveal-item.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+.tech-item:hover .tech-icon {
+  transform: scale(1.4) rotate(4deg);
+  color: var(--circle-accent);
+  text-shadow: 0 0 12px var(--circle-pop);
+}
+.tech-box:hover {
+  transform: translateY(-10px) scale(1.015);
+}
+
+.tech-box.active {
+  animation: softPop 0.6s ease-out;
+}
+
+@keyframes softPop {
+  0% { transform: scale(0.94); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}

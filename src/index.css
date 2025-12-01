@@ -1,0 +1,350 @@
+
+
+/* Root variables for theming */
+:root {
+  /* Light mode colors */
+  --bg-primary: #f5f1e8;
+  --bg-secondary: #e8f4f8;
+  --text-primary: #2c3e50;
+  --text-secondary: #5a6c7d;
+  --circle-pop: #00bfff;
+  --circle-accent: #4169e1;
+  --circle-highlight: #87ceeb;
+  --border-color: #d4e6f1;
+  --shadow: rgba(0, 191, 255, 0.4);
+  --glow: rgba(0, 191, 255, 0.6);
+}
+
+/* Dark mode colors */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1a2332;
+    --bg-secondary: #243447;
+    --text-primary: #e8f4f8;
+    --text-secondary: #b8d4e8;
+    --circle-pop: #00e5ff;
+    --circle-accent: #00ffa3;
+    --circle-highlight: #66ffcc;
+    --border-color: #3a4a5c;
+    --shadow: rgba(0, 229, 255, 0.5);
+    --glow: rgba(0, 255, 163, 0.4);
+  }
+}
+
+/* Manual dark mode toggle support */
+[data-theme="dark"] {
+  --bg-primary: #1a2332;
+  --bg-secondary: #243447;
+  --text-primary: #e8f4f8;
+  --text-secondary: #b8d4e8;
+  --circle-pop: #00e5ff;
+  --circle-accent: #00ffa3;
+  --circle-highlight: #66ffcc;
+  --border-color: #3a4a5c;
+  --shadow: rgba(0, 229, 255, 0.5);
+  --glow: rgba(0, 255, 163, 0.4);
+}
+
+[data-theme="light"] {
+  --bg-primary: #f5f1e8;
+  --bg-secondary: #e8f4f8;
+  --text-primary: #2c3e50;
+  --text-secondary: #5a6c7d;
+  --circle-pop: #00bfff;
+  --circle-accent: #4169e1;
+  --circle-highlight: #87ceeb;
+  --border-color: #d4e6f1;
+  --shadow: rgba(0, 191, 255, 0.4);
+  --glow: rgba(0, 191, 255, 0.6);
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Decorative background circles */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::before {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  right: -100px;
+  background: radial-gradient(circle, var(--circle-pop), var(--circle-accent));
+  opacity: 0.15;
+  box-shadow: 
+    0 0 100px var(--glow),
+    0 0 200px var(--shadow);
+  animation: float 20s ease-in-out infinite;
+}
+
+body::after {
+  width: 300px;
+  height: 300px;
+  bottom: -80px;
+  left: -80px;
+  background: radial-gradient(circle, var(--circle-accent), var(--circle-highlight));
+  opacity: 0.15;
+  box-shadow: 
+    0 0 80px var(--glow),
+    0 0 150px var(--shadow);
+  animation: float 15s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-30px) translateX(20px);
+  }
+}
+
+/* Main content wrapper */
+#root,
+.App {
+  position: relative;
+  z-index: 1;
+}
+
+/* Circle elements - NOW WITH REAL POP! */
+.circle,
+.circle-element,
+.pop-circle {
+  background: linear-gradient(135deg, var(--circle-pop) 0%, var(--circle-accent) 50%, var(--circle-highlight) 100%);
+  border: 3px solid var(--circle-pop);
+  box-shadow: 
+    0 0 20px var(--glow),
+    0 0 40px var(--shadow),
+    0 8px 25px rgba(0, 0, 0, 0.3),
+    inset 0 0 15px rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle::before,
+.circle-element::before,
+.pop-circle::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.circle:hover,
+.circle-element:hover,
+.pop-circle:hover {
+  transform: scale(1.05);
+  box-shadow: 
+    0 0 30px var(--glow),
+    0 0 60px var(--shadow),
+    0 12px 35px rgba(0, 0, 0, 0.4),
+    inset 0 0 20px rgba(255, 255, 255, 0.4);
+  border-color: var(--circle-highlight);
+}
+
+/* Cards and containers */
+.card,
+.container,
+.content-box {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+/* Buttons */
+button,
+.btn {
+  background: linear-gradient(135deg, var(--circle-pop), var(--circle-accent));
+  color: white;
+  border: 2px solid var(--circle-pop);
+  box-shadow: 
+    0 4px 15px var(--shadow),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 6px 20px var(--glow),
+    0 4px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, var(--circle-accent), var(--circle-pop));
+}
+
+button:active,
+.btn:active {
+  transform: translateY(-1px);
+}
+
+/* Links */
+a {
+  color: var(--circle-accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: var(--circle-pop);
+  text-shadow: 0 0 8px var(--shadow);
+}
+
+/* Input fields */
+input,
+textarea,
+select {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--circle-pop);
+  box-shadow: 
+    0 0 0 3px var(--shadow),
+    0 0 15px var(--glow);
+}
+
+/* Code blocks */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  background-color: var(--bg-secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+/* Accent elements */
+.accent,
+.highlight {
+  color: var(--circle-pop);
+  text-shadow: 0 0 10px var(--shadow);
+}
+
+/* Glowing text */
+.glow-text {
+  color: var(--circle-pop);
+  text-shadow: 0 0 10px var(--glow), 0 0 20px var(--shadow);
+}
+
+/* Additional decorative circles on page */
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--circle-pop), var(--circle-accent));
+  opacity: 0.1;
+  pointer-events: none;
+  box-shadow: 
+    0 0 50px var(--glow),
+    0 0 100px var(--shadow);
+}
+
+.bg-circle-1 {
+  width: 200px;
+  height: 200px;
+  top: 20%;
+  left: 10%;
+  animation: float 18s ease-in-out infinite;
+}
+
+.bg-circle-2 {
+  width: 150px;
+  height: 150px;
+  top: 60%;
+  right: 15%;
+  animation: float 22s ease-in-out infinite reverse;
+}
+
+.bg-circle-3 {
+  width: 180px;
+  height: 180px;
+  top: 45%;
+  left: 60%;
+  background: radial-gradient(circle, var(--circle-accent), var(--circle-highlight));
+  animation: float 25s ease-in-out infinite;
+}
+
+:root[data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #222;
+  --nav-bg: #ffffff;
+}
+
+:root[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --nav-bg: #181818;
+}
+body[data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #222;
+  --nav-bg: #ffffff;
+}
+
+body[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --nav-bg: #181818;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+nav {
+  background-color: var(--nav-bg) !important;
+  transition: background 0.3s;
+}
