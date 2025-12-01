@@ -46,6 +46,7 @@ const styles = `
   animation: fadeInDown 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
 }
 
+
 .exp-header::after {
   content: "";
   position: absolute;
@@ -474,7 +475,7 @@ export default function Experience() {
     {
       role: "Software Trainee",
       company: "Apna College",
-      date: "May 2025 – Nov 2025 · Remote",
+      date: "May 2025 – Present · Remote",
       desc: [
         "Completed MERN real-world assignments.",
         "Built production-ready components & mini apps.",
